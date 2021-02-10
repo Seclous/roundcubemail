@@ -36,7 +36,7 @@
  +-------------------------------------------------------------------------+
 */
 
-$make_it_verbose = 1;
+$make_it_verbose = 0;
 
 function console_log( $data ) {
     if($make_it_verbose == 0)
@@ -204,17 +204,18 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
             $passwordToUse = $passwordToUse . $siiNoUser;
         }
 	}
-	
-	console_log("passing the user $userToUse and the password $passwordToUse");
+
+	$auth = $RCMAIL->plugins->exec_hook('authenticate', array(
+			'host'  => $RCMAIL->autoselect_host(),
+			'user'  => trim(rcube_utils::get_input_value('_user', rcube_utils::INPUT_POST)),
+			'pass'  => $passwordToUse,
+			'valid' => $request_valid,
+			'cookiecheck' => true,
+	));	
 
 
-    $auth = $RCMAIL->plugins->exec_hook('authenticate', array(
-            'host'  => $RCMAIL->autoselect_host(),
-            'user'  => trim(rcube_utils::get_input_value('_user', rcube_utils::INPUT_POST)),
-            'pass'  => rcube_utils::get_input_value('_pass', rcube_utils::INPUT_POST, true, $pass_charset),
-            'valid' => $request_valid,
-            'cookiecheck' => true,
-    ));
+
+
 
     // Login
     if ($auth['valid'] && !$auth['abort']
