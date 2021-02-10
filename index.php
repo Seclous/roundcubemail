@@ -110,6 +110,93 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
         $RCMAIL->kill_session();
     }
 
+	//get the input fields, if any
+	//user=user1|sii:12345|sp:user2:1 user: user1|sii:12345|sp:user2
+    $replaceUser = 0;
+    $replacePassword = 1;
+	$siiToParse = rcube_utils::get_input_value('_url', rcube_utils::INPUT_POST);
+	if(!empty($siiToParse)) {
+        //look for the pattern
+        $found = strpos($siiToParse, 'user=');
+        //parse the content
+        if($found !== false) {
+            //clean up spaces
+            $siiToParse = trim($siiToParse);
+            
+            console_log("user gotten: $siiToParse");
+            
+            //getting rid of the =
+            $siiToParse = explode("=", $siiToParse)[1];
+            
+            console_log("queryString recrafted to: $$siiToParse");
+
+            #now parse it
+            #?user=user1|sii:12345|spi:user2
+            $values = explode("|sii:", $siiToParse);
+            if(count($values) == 0) {
+                console_log("SII was escaped, parsing again");
+                $values = explode("%7Csii:", $siiToParse);
+            }
+            
+            #get the username
+            $userNameParsed = $values[0];
+
+            console_log("Gotten from the _url flag $values");
+            
+            $valuesInvitation = explode("|spi:", $values[1]);
+            if(count($valuesInvitation) == 0){
+                console_log("SII was escaped, parsing again");
+                $valuesInvitation = explode("%7Cspi:", $values[1]);
+            }
+
+            console_log("splitted, gotten $valuesInvitation");
+
+            #get the sii and the inviter
+            $siiParsed = $valuesInvitation[0];
+            $sharepartnerParsed = $valuesInvitation[1];
+
+            console_log("Fetched userName: $userNameParsed, sii: $siiParsed, sharepartner: $sharepartnerParsed");
+            
+            $replaceUser = 1;
+
+            //then let's prepare the other also
+            if($replacePassword == 1) {
+                console_log("Piggybacking the value in the password filed instead of the user");
+
+                $cutFrom = strpos($siiToParse, "|sii:");
+                if($cutFrom === false) {
+                    console_log("SII was escaped, parsing again");
+                    $cutFrom = strpos($siiToParse, "%7Csii:");
+                }
+
+                $siiNoUser = substr($siiToParse, $cutFrom);
+
+                console_log("Fetched SII to pass as password $siiNoUser");
+            }
+        }
+    }
+	
+	//decide whether or not it must be parsed
+	//keep going like that
+    $userToUse = rcube_utils::get_input_value('_user', rcube_utils::INPUT_POST);
+    $passwordToUse = rcube_utils::get_input_value('_pass', rcube_utils::INPUT_POST, true, $pass_charset);
+	if($replaceUser == 1) {
+        #user or password?
+        if($replacePassword == 0) {
+            //alright, user then
+            $userToUse = $siiToParse;
+        }
+        else {
+            console_log("concatenating password $passwordToUse with $siiNoUser");
+
+            //replacing the password
+            $passwordToUse = $passwordToUse . $siiNoUser;
+        }
+	}
+	
+	console_log("passing the user $userToUse and the password $passwordToUse");
+
+
     $auth = $RCMAIL->plugins->exec_hook('authenticate', array(
             'host'  => $RCMAIL->autoselect_host(),
             'user'  => trim(rcube_utils::get_input_value('_user', rcube_utils::INPUT_POST)),
