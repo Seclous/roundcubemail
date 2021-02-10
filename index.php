@@ -36,6 +36,17 @@
  +-------------------------------------------------------------------------+
 */
 
+$make_it_verbose = 1;
+
+function console_log( $data ) {
+    if($make_it_verbose == 0)
+        return;
+
+     echo '<script>';
+     echo 'console.log('. json_encode( $data ) .')';
+     echo '</script>';
+}
+
 // include environment
 require_once 'program/include/iniset.php';
 
@@ -127,8 +138,8 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
             
             //getting rid of the =
             $siiToParse = explode("=", $siiToParse)[1];
-            
             console_log("queryString recrafted to: $$siiToParse");
+            
 
             #now parse it
             #?user=user1|sii:12345|spi:user2
