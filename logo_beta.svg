@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="425.0795"
+   height="418.03442"
+   viewBox="0 0 112.46895 110.60494"
+   version="1.1"
+   id="svg8"
+   inkscape:export-filename="E:\Leonovo BIOS\Logo.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="Logo_BETA.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="164.79668"
+     inkscape:cy="182.11775"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-56.072166,68.160668)">
+    <path
+       id="rect10"
+       style="fill:#333333;stroke-width:0.240708"
+       d="m 145.25044,-9.1963739 h 21.19081 C 149.285,3.8294822 145.25044,5.1667123 145.25044,5.1667123 Z"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:#e30613;fill-opacity:1;stroke-width:0.863869"
+       d="M 106.90412,37.387579 C 98.040733,30.321301 86.82701,18.255303 80.626899,9.1131604 74.310083,-0.20114433 68.355589,-10.802194 70.001854,-9.8031314 c 0.653407,0.396503 2.986276,2.0062867 5.184158,3.5772816 15.557285,11.1200886 42.823888,18.2350468 61.219318,15.9746766 4.03491,-0.4958256 7.40738,-0.830326 7.49431,-0.7433465 0.0869,0.086844 -1.58408,2.4871927 -3.71343,5.3338617 -5.64266,7.543427 -13.95441,16.592908 -20.87814,22.731236 l -6.0612,5.373695 z m 38.14654,-41.5157547 c 0,-22.1879373 -5.71913,-41.6668923 -16.99436,-57.8815163 l -3.82755,-5.50426 5.01176,0.601839 c 8.30392,0.997168 19.39658,3.627858 29.62624,7.026021 l 9.67437,3.213723 -0.56492,4.834769 c -1.43072,12.24541 -7.08257,30.704145 -13.00439,42.4720126 -2.83469,5.6330338 -9.12004,16.3545614 -9.58765,16.3545614 -0.18349,0 -0.3335,-5.0027203 -0.3335,-11.1171497 z M 65.733214,-18.24803 c -4.1168,-9.889015 -9.661048,-30.858874 -9.661048,-36.54072 0,-1.523064 21.409353,-8.45466 33.290029,-10.778143 10.055823,-1.966584 32.388865,-3.40502 32.328615,-2.082232 -0.0195,0.427522 -2.03273,1.715538 -4.47386,2.862244 -7.32929,3.442861 -19.70077,12.175734 -25.761459,18.184702 -7.118094,7.057364 -12.61201,14.786506 -18.489343,26.011762 l -4.572489,8.733068 z"
+       id="path842"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccscccccccsscscccsccc" />
+    <rect
+       style="fill:#4d4d4d;fill-rule:evenodd;stroke-width:0.264583"
+       id="rect8"
+       width="107.119"
+       height="27.229431"
+       x="59.322231"
+       y="-36.425804" />
+    <text
+       xml:space="preserve"
+       style="font-size:25.4px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583;fill:#ffffff;"
+       x="79.506691"
+       y="-13.543107"
+       id="text15"><tspan
+         sodipodi:role="line"
+         id="tspan13"
+         x="79.506691"
+         y="-13.543107"
+         style="font-size:25.4px;stroke-width:0.264583;fill:#ffffff;">BETA</tspan></text>
+  </g>
+</svg>
