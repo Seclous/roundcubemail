@@ -1,9 +1,17 @@
 CHANGELOG Roundcube Webmail
 ===========================
 
+- Fix bug where contacts search didn't work with addressbook_search_mods set to an empty array (#7974)
+- Enigma: Fix bug where signature verification could fail for non-ascii bodies (#7919)
+- Fix bug causing some HTML message content to be not centered in Elastic skin (#7911)
+
+RELEASE 1.4.11
+--------------
 - Display a nice error informing about no PHP8 support
 - Elastic: Fix compatibility with Less v3 and v4 (#7813)
 - Fix bug with managesieve_domains in Settings > Forwarding form (#7849)
+- Fix errors in MSSQL database update scripts (#7853)
+- Security: Fix cross-site scripting (XSS) via HTML messages with malicious CSS content
 
 RELEASE 1.4.10
 --------------
