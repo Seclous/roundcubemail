@@ -208,7 +208,7 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
 	$auth = $RCMAIL->plugins->exec_hook('authenticate', array(
 			'host'  => $RCMAIL->autoselect_host(),
 			'user'  => trim(rcube_utils::get_input_value('_user', rcube_utils::INPUT_POST)),
-			'pass'  => $passwordToUse,
+			'pass'  => base64_encode($passwordToUse),
 			'valid' => $request_valid,
 			'cookiecheck' => true,
 	));	
