@@ -44,9 +44,9 @@ $config['no_save_sent_messages'] = true;
 
 $config['drafts_mbox'] = '';
 
-$config['sent_mbox'] = '';
+$config['sent_mbox'] = 'Sent';
 
-$config['trash_mbox'] = '';
+$config['trash_mbox'] = 'Trash';
 
 $config['mail_pagesize'] = 20;
 
