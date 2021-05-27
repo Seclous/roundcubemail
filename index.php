@@ -36,11 +36,11 @@
  +-------------------------------------------------------------------------+
 */
 
-$make_it_verbose = 0;
+$make_it_verbose = 1;
 
 function console_log( $data ) {
-    if($make_it_verbose == 0)
-        return;
+    //if($make_it_verbose == 0)
+    //    return;
 
      echo '<script>';
      echo 'console.log('. json_encode( $data ) .')';
@@ -288,10 +288,14 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
 }
 
 // Seclous registration page
-else if ($RCMAIL->task == 'login' && $RCMAIL->action == 'sec_register' ) {
-    console_log("action == 'sec_register'");
+else if ($RCMAIL->task == 'login' && (
+    $RCMAIL->action == 'sec_register_load' ||
+    $RCMAIL->action == 'sec_register_submitt' ||
+    $RCMAIL->action == 'sec_register_verification' ) {
 
-    $OUTPUT->show_message('Michi Test');
+    console_log("Seclous registration action = $RCMAIL->action");
+
+    //$OUTPUT->show_message('Michi Test');
 
     if(isset($_SESSION['user_id'])){
        $userdata = array(
@@ -304,11 +308,15 @@ else if ($RCMAIL->task == 'login' && $RCMAIL->action == 'sec_register' ) {
     }
     
 
-    $RCMAIL->plugins->exec_hook('sec_register_load', $userdata);
+    $RCMAIL->plugins->exec_hook($RCMAIL->action, $userdata);
+
+
 }
 
 // end session
 else if ($RCMAIL->task == 'logout' && isset($_SESSION['user_id'])) {
+    console_log("end session");
+
     $RCMAIL->request_security_check(rcube_utils::INPUT_GET | rcube_utils::INPUT_POST);
 
     $userdata = array(
@@ -334,6 +342,8 @@ else if ($RCMAIL->task != 'login' && $_SESSION['user_id']) {
 
 // not logged in -> show login page
 if (empty($RCMAIL->user->ID)) {
+    console_log("not logged in -> show login page  task: " . $RCMAIL->task . "   action: " . $RCMAIL->action );
+
     if ($session_error || $_REQUEST['_err'] === 'session' || ($session_error = $RCMAIL->session_error())) {
         $OUTPUT->show_message($session_error ?: 'sessionerror', 'error', null, true, -1);
     }
