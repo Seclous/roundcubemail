@@ -287,6 +287,26 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
     }
 }
 
+// Seclous registration page
+else if ($RCMAIL->task == 'login' && $RCMAIL->action == 'sec_register' ) {
+    console_log("action == 'sec_register'");
+
+    $OUTPUT->show_message('Michi Test');
+
+    if(isset($_SESSION['user_id'])){
+       $userdata = array(
+        'user' => $_SESSION['username'],
+        'host' => $_SESSION['storage_host'],
+        'lang' => $RCMAIL->user->language,
+        ); 
+    }else{
+        $userdata = null;
+    }
+    
+
+    $RCMAIL->plugins->exec_hook('sec_register_load', $userdata);
+}
+
 // end session
 else if ($RCMAIL->task == 'logout' && isset($_SESSION['user_id'])) {
     $RCMAIL->request_security_check(rcube_utils::INPUT_GET | rcube_utils::INPUT_POST);
