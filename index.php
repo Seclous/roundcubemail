@@ -290,8 +290,8 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
 // Seclous registration page
 else if ($RCMAIL->task == 'login' && (
     $RCMAIL->action == 'sec_register_load' ||
-    $RCMAIL->action == 'sec_register_submitt' ||
-    $RCMAIL->action == 'sec_register_verification' ) {
+    $RCMAIL->action == 'sec_register_submit' ||
+    $RCMAIL->action == 'sec_register_verification' )) {
 
     console_log("Seclous registration action = $RCMAIL->action");
 
@@ -342,7 +342,7 @@ else if ($RCMAIL->task != 'login' && $_SESSION['user_id']) {
 
 // not logged in -> show login page
 if (empty($RCMAIL->user->ID)) {
-    console_log("not logged in -> show login page  task: " . $RCMAIL->task . "   action: " . $RCMAIL->action );
+    console_log("not logged in -> show login page  task: " . $RCMAIL->task . "   $session_error: " . $session_error . '  $_REQUEST[_err]: '. $_REQUEST['_err'] . '  RCMAIL:' . $RCMAIL->session_error() );
 
     if ($session_error || $_REQUEST['_err'] === 'session' || ($session_error = $RCMAIL->session_error())) {
         $OUTPUT->show_message($session_error ?: 'sessionerror', 'error', null, true, -1);
