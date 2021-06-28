@@ -287,6 +287,11 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
     }
 }
 
+
+
+
+
+
 // Seclous registration page
 else if ($RCMAIL->task == 'login' && (
     $RCMAIL->action == 'sec_register_load' ||
@@ -309,6 +314,11 @@ else if ($RCMAIL->task == 'login' && (
     
 
     $RCMAIL->plugins->exec_hook($RCMAIL->action, $userdata);
+
+
+
+
+
 
 
 }
