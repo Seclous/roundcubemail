@@ -352,7 +352,18 @@ else if ($RCMAIL->task != 'login' && $_SESSION['user_id']) {
 
 // not logged in -> show login page
 if (empty($RCMAIL->user->ID)) {
+
+    //MICHI 
     console_log("not logged in -> show login page  task: " . $RCMAIL->task . "   $session_error: " . $session_error . '  $_REQUEST[_err]: '. $_REQUEST['_err'] . '  RCMAIL:' . $RCMAIL->session_error() );
+
+    if(isset($_GET['registration'])){
+        if($_GET['registration'] === "success"){
+            //TODO Locale
+            $RCMAIL->output->show_message("Sie haben sich erfolgreich angemeldet.", 'confirmation');
+        }
+    }
+
+    
 
     if ($session_error || $_REQUEST['_err'] === 'session' || ($session_error = $RCMAIL->session_error())) {
         $OUTPUT->show_message($session_error ?: 'sessionerror', 'error', null, true, -1);
