@@ -134,11 +134,21 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
             //clean up spaces
             $siiToParse = trim($siiToParse);
             
-            console_log("user gotten: $siiToParse");
+            console_log("user part1: $siiToParse");
+
+
+            //remove other parameters
+            $found = strpos($siiToParse, '&');
+            if($found !== false){
+                $siiToParse = substr($siiToParse, 0, $found);
+                console_log("user gotten clean: $siiToParse");
+            }
+
+            console_log("user gotten clean: $siiToParse");
             
             //getting rid of the =
             $siiToParse = explode("=", $siiToParse)[1];
-            console_log("queryString recrafted to: $$siiToParse");
+            console_log("queryString recrafted to: $siiToParse");
             
 
             #now parse it
@@ -168,28 +178,42 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
 
             console_log("Fetched userName: $userNameParsed, sii: $siiParsed, sharepartner: $sharepartnerParsed");
             
+
+
             $replaceUser = 1;
 
-            //then let's prepare the other also
-            if($replacePassword == 1) {
-                console_log("Piggybacking the value in the password filed instead of the user");
 
-                $cutFrom = strpos($siiToParse, "|sii:");
-                if($cutFrom === false) {
-                    console_log("SII was escaped, parsing again");
-                    $cutFrom = strpos($siiToParse, "%7Csii:");
+            //Michi: I dont get this code!?
+
+            if(!empty($siiParsed)){
+
+                //then let's prepare the other also
+                if($replacePassword == 1) {
+                    console_log("Piggybacking the value in the password filed instead of the user");
+
+                    $cutFrom = strpos($siiToParse, "|sii:");
+                    if($cutFrom === false) {
+                        console_log("SII was escaped, parsing again");
+                        $cutFrom = strpos($siiToParse, "%7Csii:");
+                    }
+
+                    $siiNoUser = substr($siiToParse, $cutFrom);
+
+                    console_log("Fetched SII to pass as password $siiNoUser");
                 }
-
-                $siiNoUser = substr($siiToParse, $cutFrom);
-
-                console_log("Fetched SII to pass as password $siiNoUser");
             }
         }
     }
 	
 	//decide whether or not it must be parsed
 	//keep going like that
-    $userToUse = rcube_utils::get_input_value('_user', rcube_utils::INPUT_POST);
+    $userToUse = trim(rcube_utils::get_input_value('_user', rcube_utils::INPUT_POST));
+
+    if(empty($userToUse) && !empty($userNameParsed)){
+        $userToUse = $userNameParsed;
+    }
+    //console_log("userToUse: $userToUse, userNameParsed: $userNameParsed");
+
     $passwordToUse = rcube_utils::get_input_value('_pass', rcube_utils::INPUT_POST, true, $pass_charset);
 	if($replaceUser == 1) {
         #user or password?
@@ -207,7 +231,7 @@ if ($RCMAIL->task == 'login' && $RCMAIL->action == 'login') {
 
 	$auth = $RCMAIL->plugins->exec_hook('authenticate', array(
 			'host'  => $RCMAIL->autoselect_host(),
-			'user'  => trim(rcube_utils::get_input_value('_user', rcube_utils::INPUT_POST)),
+			'user'  => $userToUse,
 			'pass'  => base64_encode($passwordToUse),
 			'valid' => $request_valid,
 			'cookiecheck' => true,
@@ -363,7 +387,7 @@ if (empty($RCMAIL->user->ID)) {
         }
     }
 
-    
+
 
     if ($session_error || $_REQUEST['_err'] === 'session' || ($session_error = $RCMAIL->session_error())) {
         $OUTPUT->show_message($session_error ?: 'sessionerror', 'error', null, true, -1);
