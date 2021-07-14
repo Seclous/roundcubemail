@@ -3,7 +3,11 @@
 <h1 class="voice"><roundcube:object name="productname" /> <roundcube:label name="login" /></h1>
 
 <div id="layout-content" class="selected no-navbar" role="main">
-	<roundcube:object name="logo" src="/plugins/sec_registration/skins/elastic/logo-big.png" data-src-small="0" id="logo" alt="Logo" />
+	<!--<roundcube:object name="logo" data-src-small="0" id="logo" alt="Logo" />-->
+	<div class="logo-container">
+		<img src="../../plugins/sec_registration/skins/elastic/logo-big.png" data-src-small="../../plugins/sec_registration/skins/elastic/logo-big.png" id="" alt="Logo">
+		<p style=" top:  16vh; color: #e30613; font-size:  20px;" class="intro">Wir machen Ihre Mails einfach sicher!</p>
+	</div>
 	<roundcube:form id="login-form" name="login-form" method="post" class="propform">
 	<roundcube:object name="loginform" form="login-form" size="40" submit=true />
 		<div id="login-footer" role="contentinfo">
