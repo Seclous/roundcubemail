@@ -38,13 +38,13 @@
 
 $make_it_verbose = 1;
 
-function console_log( $data ) {
-    //if($make_it_verbose == 0)
-    //    return;
-
-     echo '<script>';
-     echo 'console.log('. json_encode( $data ) .')';
-     echo '</script>';
+function console_log( $data, $context = 'Seclous in Console' ) {
+    // Buffering to solve problems frameworks, like header() in this and not a solid return.
+    ob_start();
+    $output  = 'console.info(\'' . $context . ':\');';
+    $output .= 'console.log(' . json_encode($data) . ');';
+    $output  = sprintf('<script>%s</script>', $output);
+    echo $output;
 }
 
 // include environment
